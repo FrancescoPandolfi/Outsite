@@ -10,12 +10,12 @@ const Navbar = () => {
                 <div className="flex items-center justify-between h-16">
                     <div className="flex items-center">
                         <div className="flex-shrink-0">
-                            <Logo />
+                            <Logo/>
                         </div>
-                        <Menubar />
+                        <Menubar/>
                     </div>
                     <div className="hidden sm:ml-6 sm:block">
-                        <User />
+                        <User/>
                     </div>
                     {/*<div className="-mr-2 flex sm:hidden">*/}
                     {/*    <button*/}

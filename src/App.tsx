@@ -1,12 +1,19 @@
-import React from 'react';
-import './App.css';
-import Navbar from "./components/navbar/Navbar";
+import {Route, Switch} from "react-router-dom";
+import BookNow from "./pages/BookNow";
+import Search from "./pages/Search";
 
 const App = () => {
   return (
-    <div >
-      <Navbar />
-    </div>
+    <main>
+      <Switch>
+      <Route path="/search/:id">
+        <Search />
+      </Route>
+      <Route path="/">
+        <BookNow />
+      </Route>
+    </Switch>
+    </main>
   );
 }
 
