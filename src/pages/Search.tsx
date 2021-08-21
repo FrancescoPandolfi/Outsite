@@ -1,4 +1,4 @@
-import React, { useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useHistory, useLocation} from "react-router-dom";
 import {Property} from "../models/Property";
 import SearchBar from "../components/searchbar/SearchBar";
@@ -7,6 +7,9 @@ import LogoBar from "../components/header/LogoBar";
 import TitleBar from "../components/header/TitleBar";
 import axios from "axios";
 import LoadingSpinner from "../components/UI/LoadingSpinner";
+import Checkout from "../components/rooms-section/checkout";
+import RoomsList from "../components/rooms-section/RoomsList";
+import Banner from "../components/rooms-section/Banner";
 
 const Search = ({
                   countries,
@@ -35,7 +38,7 @@ const Search = ({
       })
       .catch(e => console.log(e))
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [location]);
 
   return (
     <>
@@ -60,7 +63,13 @@ const Search = ({
         </div>
         <section className="px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row">
-
+            <div id="left-column" className="flex-1 py-8 md:pr-8">
+              <Banner/>
+              <RoomsList/>
+            </div>
+            <div id="right-column" className="flex-shrink-0 w-1/3 xl:w-4/12 2xl:w-1/4 p-8">
+              <Checkout/>
+            </div>
           </div>
         </section>
       </>}

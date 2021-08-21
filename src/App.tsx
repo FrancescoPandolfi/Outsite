@@ -36,11 +36,6 @@ const App = () => {
   }, [getPropertyList]);
 
   const searchButtonHandler = (): void => {
-    // const data = {
-    //   guests: guests,
-    //   days: days,
-    //   locationId: locationId
-    // }
     let queryParams = `/?id=${locationId}&guests=${guests}`;
     if (days?.to && days?.from) {
       const checkin = moment(days.from).format('YYYY-MM-DD');
@@ -48,8 +43,6 @@ const App = () => {
       queryParams += `&checkin=${checkin}&checkout=${checkout}`;
     }
     history.push(`/search${queryParams}`);
-    // axios.post<Property>('http://localhost:8888/api/locations', data).then();
-    // console.log(data);
   }
 
   const selectLocationHandler = (locationId: string): void => setLocationId(locationId);

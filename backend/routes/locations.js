@@ -1,15 +1,12 @@
 const express = require("express");
 const data = require("../data/location.json")
-const where = require("lodash.where");
-
 const Router = express.Router();
 
-
-Router.get('/locations/getAll', (req, res, next) => {
+Router.get('/locations/getAll', (req, res) => {
   res.json(data);
 });
 
-Router.get('/locations/:id', (req, res, next) => {
+Router.get('/locations/:id', (req, res) => {
   const propertyId = req.params.id;
   const property = data.properties.find(p => p.id === propertyId);
   if (!property) {
