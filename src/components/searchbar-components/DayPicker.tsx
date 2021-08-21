@@ -1,24 +1,36 @@
 import React from 'react';
 import moment from 'moment';
-
 import DayPickerInput from 'react-day-picker/DayPickerInput';
 import 'react-day-picker/lib/style.css';
-
 // @ts-ignore
 import {formatDate, parseDate} from 'react-day-picker/moment';
+import {Dates} from "../../models/Dates";
 
-export default class DayPicker extends React.Component {
-  constructor(props: any) {
+export type classProps = {
+  dayPickerHandler: ({from, to}: Dates) => void,
+  queryParamsDate: {checkin: string | null, checkout: string | null}
+}
+
+export default class DayPicker extends React.Component<classProps, Dates> {
+  constructor(props: classProps) {
     super(props);
     this.handleFromChange = this.handleFromChange.bind(this);
     this.handleToChange = this.handleToChange.bind(this);
-    this.state = {
-      from: undefined,
-      to: undefined,
-    };
+
+    if(this.props.queryParamsDate.checkout && this.props.queryParamsDate.checkin) {
+      this.state = {
+        from: new Date(this.props.queryParamsDate.checkin),
+        to: new Date(this.props.queryParamsDate.checkout)
+      };
+    } else {
+      this.state = {
+        from: undefined,
+        to: undefined,
+      };
+    }
   }
 
-  showFromMonth() {
+  showFromMonth(): void {
     // @ts-ignore
     const {from, to} = this.state;
     if (!from) {
@@ -30,13 +42,14 @@ export default class DayPicker extends React.Component {
     }
   }
 
-  handleFromChange(from: any) {
-    // Change the from date and focus the "to" input field
+  handleFromChange(from: Date): void {
     this.setState({from});
+    this.props.dayPickerHandler({from: from, to: this.state.to});
   }
 
-  handleToChange(to: any) {
+  handleToChange(to: Date): void {
     this.setState({to}, this.showFromMonth);
+    this.props.dayPickerHandler({from: this.state.from, to: to});
   }
 
   render() {
@@ -45,6 +58,8 @@ export default class DayPicker extends React.Component {
     const modifiers = {start: from, end: to};
     return (
       <div className="InputFromTo flex flex-1">
+
+        {/*FROM DATE PICKER*/}
         <DayPickerInput
           value={from}
           placeholder="Check-in"
@@ -52,7 +67,7 @@ export default class DayPicker extends React.Component {
           parseDate={parseDate}
           dayPickerProps={{
             selectedDays: [from, {from, to}],
-            disabledDays: {after: to},
+            disabledDays: {before: new Date()},
             toMonth: to,
             modifiers,
             numberOfMonths: 1,
@@ -66,8 +81,9 @@ export default class DayPicker extends React.Component {
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
         </svg>
       </span>
-
         <span className="InputFromTo-to">
+
+          {/*TO DATE PICKER*/}
           <DayPickerInput
             // @ts-ignore
             ref={el => (this.to = el)}
@@ -77,7 +93,7 @@ export default class DayPicker extends React.Component {
             parseDate={parseDate}
             dayPickerProps={{
               selectedDays: [from, {from, to}],
-              disabledDays: {before: from},
+              disabledDays: {before: from!},
               modifiers,
               month: from,
               fromMonth: from,

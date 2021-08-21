@@ -6,26 +6,45 @@ import {Property} from "../../models/Property";
 import {Disclosure} from '@headlessui/react'
 import {ChevronUpIcon} from '@heroicons/react/solid'
 import LocationElement from "../locations/LocationElement";
+import {useLocation} from "react-router-dom";
 
-const SelectLocation = ({properties, countries}: { properties: Property[], countries: string[] }) => {
+export type SelectLocationProps = {
+  properties: Property[],
+  countries: string[],
+  selectLocationHandler: (locationId: string) => void
+}
 
-  const [selected, setSelected] = useState<Property | null>(null)
+const SelectLocation = ({properties, countries, selectLocationHandler}: SelectLocationProps) => {
+
+  const [location, setLocation] = useState<Property>()
+  const loc = useLocation();
+  const queryParams = new URLSearchParams(loc.search);
 
   useEffect(() => {
     if (properties.length > 0) {
-      setSelected(properties[0]);
+      const locationFromId = properties.find(p => p.id === queryParams.get('id'));
+      if (locationFromId) {
+        setLocation(locationFromId);
+      } else {
+        setLocation(properties[0]);
+      }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [properties])
 
   useEffect(() => {
-  }, [selected])
+    if (location) {
+      selectLocationHandler(location.id);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [location, selectLocationHandler])
 
   return (
-    <Listbox value={selected} onChange={setSelected}>
+    <Listbox value={location} onChange={setLocation}>
       <div className="relative mt-1">
         <Listbox.Button
           className="relative w-full bg-white border border-gray-300 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-outsite-green focus:border-outsite-green sm:text-sm">
-          <span className="text-sm block truncate">{selected?.wfContent?.name}</span>
+          <span className="text-sm block truncate">{location?.wfContent?.name}</span>
           <span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
               <SelectorIcon
                 className="w-5 h-5 text-gray-400"
@@ -57,8 +76,8 @@ const SelectLocation = ({properties, countries}: { properties: Property[], count
                     <Disclosure.Panel className="px-4 pb-2 text-gray-500">
                       {properties
                         .filter(p => p.region === c)
-                        .map((p, i) => <LocationElement key={i} p={p} />
-                      )}
+                        .map((p, i) => <LocationElement key={i} p={p}/>
+                        )}
                     </Disclosure.Panel>
                   </>
                 )}

@@ -14,11 +14,7 @@ const Locations = ({properties}: { properties: Property[] }) => {
 
   return (
     <div className="container mx-auto px-4 sm:px-6 lg:px-8 my-16 space-y-6">
-      <Tab.Group
-        onChange={(index) => {
-          console.log('Changed selected tab to:', index)
-        }}
-      >
+      <Tab.Group>
         <Tab.List>
           {countries.map((country, i) => (
             <Tab key={i} className={({selected}) => selected
@@ -35,7 +31,7 @@ const Locations = ({properties}: { properties: Property[] }) => {
                   {properties
                     .filter(p => p.region === country)
                     .map(p => (
-                      <Link to={`/search/${p.id}`} key={p.id}>
+                      <Link to={`/search/?id=${p.id}`} key={p.id}>
                         <div
                           className='aspect-w-4 aspect-h-3 bg-cover bg-no-repeat bg-center rounded-md'
                           style={{backgroundImage: `url(${(p.wfContent.heroImage)})`}}>
