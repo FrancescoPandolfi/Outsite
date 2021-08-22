@@ -2,9 +2,6 @@ import {Property} from "../../models/Property";
 
 const TitleBar = ({selectedProperty}: { selectedProperty: Property }) => {
 
-  // const params = useParams<{id: string}>();
-  // console.log(params.id);
-
   return (
     <div className="flex justify-between mb-4">
       <div>

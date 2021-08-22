@@ -11,18 +11,18 @@ const LocationElement = ({p}: { p: Property }) => {
     >
       {({selected, active}) => (
         <div className="flex flex-col">
-                      <span
-                        className={`${selected ? 'font-medium' : 'font-normal'} text-gray-900 text-base truncate transition-colors duration-200`}>
-                        {p.wfContent.name}
-                      </span>
+          <span
+            className={`${selected ? 'font-medium' : 'font-normal'} text-gray-900 text-base truncate transition-colors duration-200`}>
+            {p.wfContent.name}
+          </span>
           <span className=' text-gray-500 text-xxs tracking-widest uppercase truncate'>
-                        {p.wfContent.houseName}
-                      </span>
+            {p.wfContent.houseName}
+          </span>
           {selected ? (
             <span
               className={`${active ? 'text-outsite-green' : 'text-outsite-green'}  absolute inset-y-0 left-0 flex items-center pl-3`}>
-                          <CheckIcon className="w-5 h-5" aria-hidden="true"/>
-                        </span>
+              <CheckIcon className="w-5 h-5" aria-hidden="true"/>
+            </span>
           ) : null}
         </div>
       )}

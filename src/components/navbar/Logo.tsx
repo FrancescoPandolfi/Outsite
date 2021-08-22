@@ -1,4 +1,5 @@
 const Logo = ({mode = 'dark'}: { mode?: 'light' | 'dark' }) => (
+
   <svg width="1496" height="189" viewBox="0 0 1496 189" fill="none" xmlns="http://www.w3.org/2000/svg"
        className={`h-5 w-auto ${(mode === 'light') ? 'text-white' : ''}`}>
     <path
@@ -21,6 +22,7 @@ const Logo = ({mode = 'dark'}: { mode?: 'light' | 'dark' }) => (
       d="M1384.55 185V3.51991H1495.31V22.7599H1406.39V83.5999H1490.11V102.84H1406.39V165.76H1495.31V185H1384.55Z"
       fill={`${(mode === 'light') ? '#FFFFFF' : '#100C20'}`}></path>
   </svg>
+
 );
 
 export default Logo;

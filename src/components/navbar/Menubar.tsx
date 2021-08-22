@@ -1,26 +1,24 @@
+import {Link} from "react-router-dom";
+
 const Menubar = () => {
   return (
     <div className="hidden sm:block sm:ml-6">
       <div className="flex space-x-2">
-        <a className="py-2 px-3 inline-flex items-center text-sm font-medium text-outsite-green" href="/">
+        <Link to="/" className="py-2 px-3 inline-flex items-center text-sm font-medium text-outsite-green">
           Book
-        </a>
-        <a className="py-2 px-3 inline-flex items-center text-sm font-medium text-gray-600 hover:text-gray-900"
-           href="/">
+        </Link>
+        <Link to="/" className="py-2 px-3 inline-flex items-center text-sm font-medium text-gray-600 hover:text-gray-900">
           Trips
-        </a>
-        <a className="py-2 px-3 inline-flex items-center text-sm font-medium text-gray-600 hover:text-gray-900"
-           href="/">
+        </Link>
+        <Link to="/" className="py-2 px-3 inline-flex items-center text-sm font-medium text-gray-600 hover:text-gray-900">
           Rewards
-        </a>
-        <a className="py-2 px-3 inline-flex items-center text-sm font-medium text-gray-600 hover:text-gray-900"
-           href="/">
+        </Link>
+        <Link to="/" className="py-2 px-3 inline-flex items-center text-sm font-medium text-gray-600 hover:text-gray-900">
           Refer a Friend
-        </a>
-        <a className="py-2 px-3 inline-flex items-center text-sm font-medium text-gray-600 hover:text-gray-900" href="/" >
+        </Link>
+        <Link to="/" className="py-2 px-3 inline-flex items-center text-sm font-medium text-gray-600 hover:text-gray-900">
           Membership
-        </a>
-
+        </Link>
       </div>
     </div>
   );

@@ -31,7 +31,6 @@ export default class DayPicker extends React.Component<classProps, Dates> {
   }
 
   showFromMonth(): void {
-    // @ts-ignore
     const {from, to} = this.state;
     if (!from) {
       return;
@@ -53,7 +52,6 @@ export default class DayPicker extends React.Component<classProps, Dates> {
   }
 
   render() {
-    // @ts-ignore
     const {from, to} = this.state;
     const modifiers = {start: from, end: to};
     return (

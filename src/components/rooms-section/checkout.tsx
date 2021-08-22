@@ -2,7 +2,7 @@ const Checkout = () => {
   return (
     <>
       <div
-        className="fixed inset-0 h-screen z-30 bg-white overflow-auto sm:relative sm:inset-auto space-y-6 p-4 pb-24 sm:h-auto sm:overflow-none sm:p-1 sm:pb-1 sm:z-auto hidden sm:block">
+        className="h-screen bg-white overflow-auto space-y-6 p-4 pb-24 sm:h-auto sm:overflow-none sm:p-1 sm:pb-1 hidden sm:block">
         <h5>Your Trip</h5>
         <p>To create your Trip, select a Room or Bed, and 'Add to Trip'. Search again and select your chosen options to add more Rooms, Beds or Spaces to your Trip.</p>
         <div className="space-y-3">
