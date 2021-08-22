@@ -1,7 +1,7 @@
 import {Route, Switch, useHistory} from "react-router-dom";
 import BookNow from "./pages/BookNow";
 import Search from "./pages/Search";
-import {useCallback, useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import {Property} from "./models/Property";
 import {Dates} from "./models/Dates";
 import axios from "axios";
@@ -23,17 +23,13 @@ const App = () => {
     'Caribbean',
   ];
 
-  const getPropertyList = useCallback(() => {
+  useEffect(() => {
     axios.get<{properties: Property[]}>('http://localhost:8888/api/locations/getAll')
       .then(r => {
         setProperties(r.data.properties);
       })
       .catch(e => console.log(e))
   }, []);
-
-  useEffect(() => {
-    getPropertyList();
-  }, [getPropertyList]);
 
   const searchButtonHandler = (): void => {
     let queryParams = `/?id=${locationId}&guests=${guests}`;
